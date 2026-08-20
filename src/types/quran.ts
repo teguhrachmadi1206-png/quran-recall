@@ -3,12 +3,12 @@ type Audio = {
     [audioId: string]: string
 }
 
-type AyahEN = {
+export type AyahEN = {
     numberInSurah: number
     textArabic: string
     textLatin: string
     textEnglish: string
-    audio: Audio
+    audio: Audio[]
 }
 
 type OtherSurahEN = {
@@ -18,7 +18,7 @@ type OtherSurahEN = {
     numberOfAyahs: number
 }
 
-type AyahID = {
+export type AyahID = {
     nomorAyat: number
     teksArab: string
     teksLatin: string
@@ -88,7 +88,7 @@ export type SurahHead = {
 
 export type SurahList = SurahHead[]
 
-type AyahData = {
+export type AyahData = {
     number: number
     arabic: string
     latin: string

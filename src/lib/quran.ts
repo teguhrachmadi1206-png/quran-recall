@@ -1,4 +1,4 @@
-import type { SurahEN, SurahID, SurahHead, SurahData } from "@/types/quran"
+import type { SurahEN, SurahID, SurahHead, SurahData, AyahEN, AyahID, AyahData } from "@/types/quran"
 
 export async function getSurahENList(): Promise<SurahHead[]> {
     const response = await fetch("https://equran.id/api/en/surah")
@@ -43,13 +43,25 @@ export async function getSurahDetailEN(surahNumber: string): Promise<SurahData> 
     }
 
     const data = await response.json()
+    const ayahDatas: AyahData[] = []
+    await data.data.ayahs.forEach((ayah: AyahEN) => {
+        ayahDatas.push({
+            number: ayah.numberInSurah,
+            arabic: ayah.textArabic,
+            latin: ayah.textLatin,
+            translation: ayah.textEnglish,
+            audio: ayah.audio,
+        })
+    })
+
     const surahData: SurahData = {
         number: data.data.number,
         title: data.data.englishName,
         titleTranslation: data.data.englishNameTranslation,
         numberOfAyahs: data.data.numberOfAyahs,
-        ayahs: data.data.ayahs
+        ayahs: ayahDatas,
     }
+
     return surahData
 }
 
@@ -61,12 +73,24 @@ export async function getSurahDetailID(surahNumber: string): Promise<SurahData> 
     }
 
     const data = await response.json()
+    const ayahDatas: AyahData[] = []
+    await data.data.ayat.forEach((ayah: AyahID) => {
+        ayahDatas.push({
+            number: ayah.nomorAyat,
+            arabic: ayah.teksArab,
+            latin: ayah.teksLatin,
+            translation: ayah.teksIndonesia,
+            audio: ayah.audio,
+        })
+    })
+
     const surahData: SurahData = {
         number: data.data.nomor,
         title: data.data.namaLatin,
         titleTranslation: data.data.arti,
         numberOfAyahs: data.data.jumlahAyat,
-        ayahs: data.data.ayat
+        ayahs: ayahDatas
     }
+
     return surahData
 }

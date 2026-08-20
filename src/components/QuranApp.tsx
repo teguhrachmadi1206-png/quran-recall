@@ -76,6 +76,7 @@ export default function QuranApp() {
                     inputConfig={inputConfig}
                     data={displayData} />
                 <DetailSection
+                    sessionData={displayData}
                     surahData={surahData} />
             </div>
         </>
