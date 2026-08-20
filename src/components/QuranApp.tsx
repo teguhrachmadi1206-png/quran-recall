@@ -51,6 +51,14 @@ export default function QuranApp() {
         }
     }, [selectedSurah])
 
+    useEffect(() => {
+        clearSession()
+    }, [language, selectedSurah, inputConfig])
+
+    function clearSession() {
+        setDisplayData({ ayahList: [], currentIndex: 0, currentAyah: 0, history: [] })
+    }
+
     return (
         <>
             <Header />
@@ -62,9 +70,10 @@ export default function QuranApp() {
                     surahData={surahData}
                     config={inputConfig}
                     setConfig={setInputConfig}
+                    displayData={displayData}
                     setDisplayData={setDisplayData} />
                 <DisplaySection
-                    currentAyah={selectedSurah}
+                    inputConfig={inputConfig}
                     data={displayData} />
                 <DetailSection
                     surahData={surahData} />

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { SurahList, SurahHead, SurahData, InputConfig, DisplayData } from "@/types/quran";
-import { generateNumberList } from "@/lib/hooks";
+import { generateRandomList, generateRandomNumber } from "@/lib/hooks";
 
 interface InputSectionProps {
     surahList: SurahList
@@ -11,6 +11,7 @@ interface InputSectionProps {
     surahData: SurahData | undefined
     config: InputConfig
     setConfig: React.Dispatch<React.SetStateAction<InputConfig>>
+    displayData: DisplayData
     setDisplayData: React.Dispatch<React.SetStateAction<DisplayData>>
 }
 
@@ -21,12 +22,17 @@ export default function InputSection({
     surahData,
     config,
     setConfig,
+    displayData,
     setDisplayData
 }: InputSectionProps) {
     const ayahRange = surahData && Array.from({ length: surahData.numberOfAyahs }, (_, i) => i + 1)
+    const isSessionFinished = config.firstAyah === 1 && config.lastAyah === surahData?.numberOfAyahs
+        && displayData.history.length === (config.lastAyah - config.firstAyah + 1)
+    const isLastSurah = Number(surah) === 114
+    const invalidConfig = config.firstAyah >= config.lastAyah
 
-    function generateNew() {
-        const list = generateNumberList(config.firstAyah, config.lastAyah)
+    function newSessionNoRepeat() {
+        const list = generateRandomList(config.firstAyah, config.lastAyah)
         setDisplayData({
             ayahList: list,
             currentIndex: 0,
@@ -35,13 +41,60 @@ export default function InputSection({
         })
     }
 
-    function nextNumber() {
+    function newSessionWithRepeat() {
+        const current = generateRandomNumber(config.firstAyah, config.lastAyah)
+        setDisplayData({
+            ayahList: [],
+            currentIndex: 0,
+            currentAyah: current,
+            history: [current]
+        })
+    }
+
+    function nextNumberNoRepeat() {
+        if (displayData.history.length === (config.lastAyah - config.firstAyah + 1)) {
+            return
+        } else {
+            setDisplayData((prev) => ({
+                ...prev,
+                currentIndex: prev.currentIndex + 1,
+                currentAyah: prev.ayahList[prev.currentIndex + 1],
+                history: [...prev.history, prev.ayahList[prev.currentIndex + 1]]
+            }))
+        }
+    }
+
+    function nextNumberWithRepeat() {
+        const current = generateRandomNumber(config.firstAyah, config.lastAyah)
         setDisplayData((prev) => ({
             ...prev,
-            currentIndex: prev.currentIndex + 1,
-            currentAyah: prev.ayahList[prev.currentIndex + 1],
-            history: [...prev.history, prev.ayahList[prev.currentIndex + 1]]
+            currentAyah: current,
+            history: [...prev.history, current]
         }))
+    }
+
+    function mainButtonHandler() {
+        if (invalidConfig) {
+            return
+        }
+
+        if (config.noRepeat) {
+            if (displayData.history.length > 0) {
+                nextNumberNoRepeat()
+            } else {
+                newSessionNoRepeat()
+            }
+        } else {
+            if (displayData.history.length > 0) {
+                nextNumberWithRepeat()
+            } else {
+                newSessionWithRepeat()
+            }
+        }
+    }
+
+    function nextSurahHandler() {
+        selectSurah(prev => `${Number(prev) + 1}`)
     }
 
     return (
@@ -99,10 +152,10 @@ export default function InputSection({
                 </div>
             </div>
             <div className="buttons">
-                <button className="main-btn" onClick={() => generateNew()}>Generate
+                <button className="main-btn" onClick={mainButtonHandler}>Generate
                 </button>
-                <button className="main-btn">Next Surah
-                </button>
+                {isSessionFinished && !isLastSurah && <button className="main-btn" onClick={nextSurahHandler}>Next Surah
+                </button>}
             </div>
         </section>
     )
