@@ -1,4 +1,4 @@
-import type { SurahEN, SurahID, SurahHead, SurahDetailEN, SurahDetailID, SurahData } from "@/types/quran"
+import type { SurahEN, SurahID, SurahHead, SurahData } from "@/types/quran"
 
 export async function getSurahENList(): Promise<SurahHead[]> {
     const response = await fetch("https://equran.id/api/en/surah")

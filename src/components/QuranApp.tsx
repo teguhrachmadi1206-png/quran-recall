@@ -1,27 +1,32 @@
 'use client'
-
+import { useState, useEffect } from "react"
+import { SurahHead, SurahData, InputConfig, Language, DisplayData } from "@/types/quran";
+import { getSurahDetailEN, getSurahDetailID, getSurahENList, getSurahIDList } from "@/lib/quran"
 import Header from "@/components/Header";
 import InputSection from "@/components/InputSection";
 import DisplaySection from "@/components/DisplaySection";
 import DetailSection from "@/components/DetailSection";
-import { getSurahDetailEN, getSurahDetailID, getSurahENList, getSurahIDList } from "@/lib/quran"
-import { useState, useEffect } from "react"
-import { SurahHead, SurahData, InputConfig } from "@/types/quran";
 
 export default function QuranApp() {
-    const [language, setLanguage] = useState("en")
+    const [language, setLanguage] = useState<Language>("id")
     const [surahList, setSurahList] = useState<SurahHead[]>([])
     const [selectedSurah, setSelectedSurah] = useState("0")
     const [surahData, setSurahData] = useState<SurahData>()
     const [inputConfig, setInputConfig] = useState<InputConfig>({ firstAyah: 1, lastAyah: 1, noRepeat: true })
-    const [display, setDisplay] = useState()
+    const [displayData, setDisplayData] = useState<DisplayData>({ ayahList: [], currentIndex: 0, currentAyah: 0, history: [] })
     const [detailConfig, setDetailConfig] = useState()
 
     useEffect(() => {
         async function fetchSurahList() {
-            const datas = language === "id"
-                ? await getSurahIDList()
-                : await getSurahENList()
+            let datas
+            switch (language) {
+                case "id":
+                    datas = await getSurahIDList()
+                    break
+                case "en":
+                    datas = await getSurahENList()
+                    break
+            }
             setSurahList(datas)
         }
         fetchSurahList()
@@ -29,13 +34,21 @@ export default function QuranApp() {
 
     useEffect(() => {
         async function fetchSurahData() {
-            const data = language === "id"
-                ? await getSurahDetailID(selectedSurah)
-                : await getSurahDetailEN(selectedSurah)
+            let data
+            switch (language) {
+                case "id":
+                    data = await getSurahDetailID(selectedSurah)
+                    break
+                case "en":
+                    data = await getSurahDetailEN(selectedSurah)
+                    break
+            }
             setSurahData(data)
             setInputConfig({ firstAyah: 1, lastAyah: data.numberOfAyahs, noRepeat: true })
         }
-        fetchSurahData()
+        if (selectedSurah !== "0") {
+            fetchSurahData()
+        }
     }, [selectedSurah])
 
     return (
@@ -44,13 +57,15 @@ export default function QuranApp() {
             <div className="main">
                 <InputSection
                     surahList={surahList}
-                    selectedSurah={selectedSurah}
+                    surah={selectedSurah}
                     selectSurah={setSelectedSurah}
                     surahData={surahData}
                     config={inputConfig}
-                    setConfig={setInputConfig} />
+                    setConfig={setInputConfig}
+                    setDisplayData={setDisplayData} />
                 <DisplaySection
-                    currentAyah={selectedSurah} />
+                    currentAyah={selectedSurah}
+                    data={displayData} />
                 <DetailSection
                     surahData={surahData} />
             </div>

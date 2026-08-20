@@ -1,10 +1,12 @@
 'use-client'
 
+import { DisplayData } from "@/types/quran"
+
 interface DisplaySectionProps {
-    currentAyah: string
+    data: DisplayData
 }
 
-export default function DisplaySection({ currentAyah }: DisplaySectionProps) {
+export default function DisplaySection({ data }: DisplaySectionProps) {
     return (
         <section className="display-section">
             <div className="sub-title-row">
@@ -15,7 +17,7 @@ export default function DisplaySection({ currentAyah }: DisplaySectionProps) {
                 <div className="display-list">
                     <span></span>
                 </div>
-                <h2 className="main-number">{currentAyah}</h2>
+                {data.currentAyah > 0 && <h2 className="main-number">{data.currentAyah}</h2>}
             </div>
         </section>
     )

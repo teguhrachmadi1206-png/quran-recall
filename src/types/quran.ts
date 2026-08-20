@@ -109,3 +109,12 @@ export type InputConfig = {
     lastAyah: number
     noRepeat: boolean
 }
+
+export type DisplayData = {
+    ayahList: number[]
+    currentAyah: number
+    currentIndex: number
+    history: number[]
+}
+
+export type Language = "en" | "id"

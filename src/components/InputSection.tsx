@@ -1,27 +1,48 @@
 'use client'
 
 import { useState } from "react";
-import { SurahList, SurahHead, SurahData, InputConfig } from "@/types/quran";
+import { SurahList, SurahHead, SurahData, InputConfig, DisplayData } from "@/types/quran";
+import { generateNumberList } from "@/lib/hooks";
 
 interface InputSectionProps {
     surahList: SurahList
-    selectedSurah: string
+    surah: string
     selectSurah: React.Dispatch<React.SetStateAction<string>>
     surahData: SurahData | undefined
     config: InputConfig
     setConfig: React.Dispatch<React.SetStateAction<InputConfig>>
+    setDisplayData: React.Dispatch<React.SetStateAction<DisplayData>>
 }
 
 export default function InputSection({
     surahList,
-    selectedSurah,
+    surah,
     selectSurah,
     surahData,
     config,
-    setConfig
+    setConfig,
+    setDisplayData
 }: InputSectionProps) {
-
     const ayahRange = surahData && Array.from({ length: surahData.numberOfAyahs }, (_, i) => i + 1)
+
+    function generateNew() {
+        const list = generateNumberList(config.firstAyah, config.lastAyah)
+        setDisplayData({
+            ayahList: list,
+            currentIndex: 0,
+            currentAyah: list[0],
+            history: [list[0]]
+        })
+    }
+
+    function nextNumber() {
+        setDisplayData((prev) => ({
+            ...prev,
+            currentIndex: prev.currentIndex + 1,
+            currentAyah: prev.ayahList[prev.currentIndex + 1],
+            history: [...prev.history, prev.ayahList[prev.currentIndex + 1]]
+        }))
+    }
 
     return (
         <section className="input-section">
@@ -32,7 +53,7 @@ export default function InputSection({
                         name="surah"
                         className="input-item"
                         onChange={(e) => selectSurah(e.currentTarget.value)}
-                        value={selectedSurah}
+                        value={surah}
                     >
                         <option value={0} disabled hidden>-- Choose Surah --</option>
                         {surahList.map((surah: SurahHead) =>
@@ -78,7 +99,7 @@ export default function InputSection({
                 </div>
             </div>
             <div className="buttons">
-                <button className="main-btn">Generate
+                <button className="main-btn" onClick={() => generateNew()}>Generate
                 </button>
                 <button className="main-btn">Next Surah
                 </button>
