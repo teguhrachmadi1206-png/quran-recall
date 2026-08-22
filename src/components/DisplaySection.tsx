@@ -3,7 +3,7 @@
 import { useRef, useEffect } from "react"
 import { DisplayData, InputConfig, DetailConfig, Language } from "@/types/config"
 import elementsText from "@/lib/text"
-import React from "react"
+import "@/app/styles/displaySection.css"
 
 interface DisplaySectionProps {
     inputConfig: InputConfig

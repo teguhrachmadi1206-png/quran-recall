@@ -1,0 +1,66 @@
+.display-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.3em;
+    font-size: var(--number-list-font-size);
+    line-height: 1.2em;
+    width: 95%;
+    height: 73px;
+    max-height: 100px;
+    overflow-y: scroll;
+    margin: 0.3em auto;
+    padding: 0.3em 0;
+    border-top: 3px solid var(--line-color);
+    border-bottom: 3px solid var(--line-color)
+}
+
+.list-number {
+    padding: 0.2em 0.5em;
+    background-color: var(--third-color);
+    height: 1.5em;
+    border-radius: 0.3em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.list-number.active {
+    background-color: var(--fourth-color);
+}
+
+.main-number {
+    font-size: var(--main-number-font-size);
+    color: transparent;
+    background: var(--gold-metallic-color);
+    background-clip: text;
+    -webkit-background-clip: text;
+}
+
+@media screen and (min-width: 640px) {
+    .display-number {
+        height: 100%;
+        max-height: 50vh;
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content: start;
+    }
+
+    .display-list {
+        align-items: start;
+        height: auto;
+        min-height: 73px;
+        max-height: 300px;
+        overflow-y: scroll;
+    }
+
+    .list-number:hover {
+        background-color: var(--third-color-hover);
+    }
+
+    .list-number.active:hover {
+        background-color: var(--fourth-color-hover);
+    }
+
+}

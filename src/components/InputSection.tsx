@@ -2,6 +2,7 @@ import { SurahList, SurahHead, SurahData } from "@/types/quran";
 import { DetailConfig, DisplayData, InputConfig, Language } from "@/types/config";
 import { generateRandomList, generateRandomNumber } from "@/lib/hooks";
 import elementsText from "@/lib/text"
+import "@/app/styles/inputSection.css"
 
 interface InputSectionProps {
     surahList: SurahList
@@ -171,7 +172,7 @@ export default function InputSection({
                     <label htmlFor="no-repeat">{elementsText[language].noRepeat}</label>
                 </div>
             </div>
-            <div className="buttons">
+            <div className="input-buttons-container">
                 <button className="main-btn" onClick={mainButtonHandler}>
                     {displayData.currentAyah > 0
                         ? elementsText[language].generateBtn.next

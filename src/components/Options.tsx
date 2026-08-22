@@ -1,5 +1,6 @@
 import { Language } from "@/types/config"
 import elementsText from "@/lib/text"
+import "@/app/styles/options.css"
 
 interface OptionsProps {
     setIsOptionOpened: React.Dispatch<React.SetStateAction<boolean>>

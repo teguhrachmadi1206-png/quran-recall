@@ -1,0 +1,107 @@
+header {
+    width: 100%;
+    height: var(--header-height);
+    padding: 2rem 0 0.5rem 0;
+    position: relative;
+    margin: 0 auto;
+}
+
+.title {
+    width: var(--main-element-width);
+    font-size: var(--title-font-size);
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    gap: 0.5em;
+    margin: 0 auto 0.25em auto;
+    color: var(--main-font-color);
+    text-shadow: 0 0 0.1em var(--font-shadow-color);
+}
+
+.title-desc {
+    width: 90%;
+    margin: 0 auto;
+    font-weight: normal;
+    font-style: italic;
+    font-size: 0.8em;
+}
+
+.menu-container {
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0 1em;
+    top: 15%;
+    height: auto;
+}
+
+.flag-container {
+    display: flex;
+    border: 1px solid var(--main-font-color);
+    border-radius: 2em;
+}
+
+.flag {
+    width: 2em;
+    font-size: 0.8em;
+    padding: 0.2em 0;
+    border-radius: 2em;
+}
+
+.flag>span {
+    padding: 0.4em 0.2em;
+}
+
+.flag.active {
+    background-color: var(--main-font-color);
+    z-index: 2;
+    border-radius: 2em;
+    color: var(--background-color1);
+}
+
+.options-icon {
+    width: 2em;
+    height: 2em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.3em;
+    padding: 0.2em;
+    gap: 15%;
+}
+
+.options-icon>.bullet {
+    height: 15%;
+    width: 90%;
+    border-radius: 1em;
+    background-color: var(--main-font-color);
+}
+
+.options-icon:active {
+    background-color: var(--secondary-button-active-color);
+}
+
+@media screen and (min-width: 640px) {
+    header {
+        max-width: 1000px;
+    }
+
+    .flag:hover {
+        background-color: var(--background-color2);
+    }
+
+    .flag.active:hover {
+        background-color: var(--main-font-color);
+    }
+
+    .options-icon:hover {
+        background-color: var(--secondary-button-hover-color);
+    }
+
+    .options-icon:active {
+        background-color: var(--secondary-button-color);
+    }
+}

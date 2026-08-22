@@ -1,0 +1,35 @@
+.input-data {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 0.7em;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.select-container {
+    display: flex;
+    gap: 0.2em;
+}
+
+.checkbox-container {
+    display: flex;
+    gap: 0.2em;
+}
+
+select {
+    height: 2em;
+    min-width: 3.7em;
+    border-radius: 5px;
+    border: 1px solid var(--select-border-color);
+    background: none;
+    color: var(--sub-font-color);
+}
+
+.input-buttons-container {
+    display: flex;
+    justify-content: center;
+    margin: 0.5em;
+    gap: 0.5em;
+}
