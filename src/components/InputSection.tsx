@@ -14,6 +14,7 @@ interface InputSectionProps {
     setDisplayData: React.Dispatch<React.SetStateAction<DisplayData>>
     setDetailConfig: React.Dispatch<React.SetStateAction<DetailConfig>>
     language: Language
+    setMessage: React.Dispatch<React.SetStateAction<string>>
 }
 
 export default function InputSection({
@@ -26,12 +27,13 @@ export default function InputSection({
     displayData,
     setDisplayData,
     setDetailConfig,
-    language
+    language,
+    setMessage
 }: InputSectionProps) {
     const ayahRange = surahData && Array.from({ length: surahData.numberOfAyahs }, (_, i) => i + 1)
-    const isSessionFinished = config.firstAyah === 1 && config.lastAyah === surahData?.numberOfAyahs
-        && displayData.history.length === (config.lastAyah - config.firstAyah + 1)
     const isLastSurah = Number(surah) === 114
+    const isSessionFinished = !isLastSurah && config.noRepeat && config.firstAyah === 1 && config.lastAyah === surahData?.numberOfAyahs
+        && displayData.history.length === (config.lastAyah - config.firstAyah + 1)
     const invalidConfig = config.firstAyah >= config.lastAyah
 
     function newSessionNoRepeat() {
@@ -56,6 +58,7 @@ export default function InputSection({
 
     function nextNumberNoRepeat() {
         if (displayData.history.length === (config.lastAyah - config.firstAyah + 1)) {
+            setMessage(elementsText[language].message.noNumber)
             return
         } else {
             setDisplayData((prev) => ({
@@ -87,10 +90,14 @@ export default function InputSection({
     }
 
     function mainButtonHandler() {
-        if (invalidConfig) {
+        if (surah === "0") {
+            setMessage(elementsText[language].message.chooseSurah)
             return
         }
-
+        if (invalidConfig) {
+            setMessage(elementsText[language].message.invalidNumber)
+            return
+        }
         if (config.noRepeat) {
             if (displayData.history.length > 0) {
                 nextNumberNoRepeat()
@@ -170,7 +177,7 @@ export default function InputSection({
                         ? elementsText[language].generateBtn.next
                         : elementsText[language].generateBtn.generate}
                 </button>
-                {isSessionFinished && !isLastSurah && <button className="main-btn" onClick={nextSurahHandler}>
+                {isSessionFinished && <button className="main-btn" onClick={nextSurahHandler}>
                     {elementsText[language].nextSurahBtn}
                 </button>}
             </div>

@@ -37,7 +37,7 @@ const elementsText = {
             noNumber: "No number left",
         },
         howToDesc: {
-            header: "How to Use – Al-Quran Random Ayah Generator",
+            header: "How to Use – Quran Recall",
             version: " (Ver1.4)",
             mainDesc:
                 "Follow the steps below to generate random verses from the Quran easily:",
@@ -65,7 +65,7 @@ const elementsText = {
         copyright: "© 2026 Teguh Rachmadi. All Rights Reserved",
     },
     id: {
-        desc: "Uji hafalan Quranmu, tiap satu ayat",
+        desc: "Uji hafalan Quranmu, per ayat satu demi satu",
         language: "Bahasa:",
         howToUse: "Cara Penggunaaan",
         closeOptions: "Tutup",
@@ -102,7 +102,7 @@ const elementsText = {
             noNumber: "Tidak ada nomor tersisa",
         },
         howToDesc: {
-            header: "Cara Penggunaan – Al-Quran Generator Ayat Acak",
+            header: "Cara Penggunaan – Quran Recall",
             version: " (Ver1.4)",
             mainDesc:
                 "Ikuti langkah-langkah berikut untuk menampilkan ayat Al-Qur’an secara acak:",

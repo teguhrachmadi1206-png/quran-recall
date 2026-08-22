@@ -18,6 +18,7 @@ export default function QuranApp() {
     const [inputConfig, setInputConfig] = useState<InputConfig>({ firstAyah: 1, lastAyah: 1, noRepeat: true })
     const [displayData, setDisplayData] = useState<DisplayData>({ ayahList: [], currentIndex: 0, currentAyah: 0, history: [] })
     const [detailConfig, setDetailConfig] = useState({ displayArabic: false, displayLatin: false, displayTranslation: false })
+    const [message, setMessage] = useState("")
 
     useEffect(() => {
         async function fetchSurahList() {
@@ -64,6 +65,16 @@ export default function QuranApp() {
         clearSession()
     }, [selectedSurah, inputConfig])
 
+    useEffect(() => {
+        if (message) {
+            const timer = setTimeout(() => {
+                setMessage("")
+            }, 2000)
+
+            return () => clearTimeout(timer)
+        }
+    }, [message])
+
     function clearSession() {
         setDisplayData({ ayahList: [], currentIndex: 0, currentAyah: 0, history: [] })
         setDetailConfig({ displayArabic: false, displayLatin: false, displayTranslation: false })
@@ -85,10 +96,14 @@ export default function QuranApp() {
                     displayData={displayData}
                     setDisplayData={setDisplayData}
                     setDetailConfig={setDetailConfig}
-                    language={language} />
+                    language={language}
+                    setMessage={setMessage} />
                 <DisplaySection
                     inputConfig={inputConfig}
                     data={displayData}
+                    setData={setDisplayData}
+                    detailConfig={detailConfig}
+                    setDetailConfig={setDetailConfig}
                     language={language} />
                 <DetailSection
                     sessionData={displayData}
@@ -101,6 +116,7 @@ export default function QuranApp() {
                         setIsOptionOpened={setIsOptionOpened}
                         language={language}
                         setLanguage={setLanguage} />}
+                {message && <p className="message">{message}</p>}
             </div>
         </>
     )

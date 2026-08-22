@@ -16,6 +16,10 @@
   --main-button-hover-color: rgb(2, 68, 41);
   --main-button-hover-font-color: rgb(171, 248, 216);
   --main-button-active-color: rgb(20, 206, 150);
+  --third-color: rgba(50, 150, 50, 0.2);
+  --third-color-hover: rgba(50, 150, 50, 0.4);
+  --fourth-color: rgba(170, 120, 30, 0.6);
+  --fourth-color-hover: rgba(170, 120, 30, 0.8);
   --select-option-color: black;
   --message-font-color: wheat;
   --message-background-color: rgba(1, 26, 13, 0.9);
@@ -192,10 +196,17 @@ header {
   width: var(--main-element-width);
   font-size: var(--title-font-size);
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  align-items: baseline;
+  gap: 0.5em;
   margin: 0 auto 0.25em auto;
   color: var(--main-font-color);
   text-shadow: 0 0 0.1em var(--font-shadow-color);
+}
+
+.version {
+  font-size: 0.5em;
+  color: var(--sub-font-color)
 }
 
 .sub-title-row {
@@ -315,11 +326,6 @@ option {
   padding: 0.7em 1em;
 }
 
-.main-btn:hover {
-  background: var(--main-button-hover-color);
-  color: var(--main-button-hover-font-color);
-}
-
 .main-btn:active {
   background-color: var(--main-button-active-color);
 }
@@ -351,11 +357,6 @@ option {
   color: var(--secondary-button-font-color)
 }
 
-.main-btn.toggle.all:hover {
-  background-color: var(--secondary-button-hover-color);
-  color: var(--secondary-button-hover-font-color);
-}
-
 .main-btn.toggle.all:active {
   background-color: var(--secondary-button-active-color);
 }
@@ -375,7 +376,7 @@ option {
 
 .list-number {
   padding: 0.2em 0.5em;
-  background-color: rgba(50, 150, 50, 0.2);
+  background-color: var(--third-color);
   height: 1.5em;
   border-radius: 0.3em;
   display: flex;
@@ -384,8 +385,8 @@ option {
   cursor: pointer;
 }
 
-.list-number:hover {
-  background-color: rgba(50, 150, 50, 0.4);
+.list-number.active {
+  background-color: var(--fourth-color);
 }
 
 .display-list {
@@ -415,7 +416,7 @@ option {
   display: flex;
   align-items: center;
   justify-content: center;
-  top: calc(75% - 25px);
+  top: calc(40.5% - 25px);
   left: calc(50% - 100px);
   width: 200px;
   height: 50px;
@@ -490,10 +491,6 @@ label {
   border-radius: 1em;
   position: absolute;
   right: 0;
-}
-
-.audio-button:hover {
-  background-color: var(--background-color1);
 }
 
 .audio-button:active {
@@ -587,6 +584,40 @@ label {
     align-items: start;
     justify-content: center;
     gap: 10px;
+  }
+
+  .main-btn:hover {
+    background: var(--main-button-hover-color);
+    color: var(--main-button-hover-font-color);
+  }
+
+  .main-btn:active {
+    background-color: var(--main-button-active-color);
+  }
+
+  .main-btn.toggle.all:hover {
+    background-color: var(--secondary-button-hover-color);
+    color: var(--secondary-button-hover-font-color);
+  }
+
+  .main-btn.toggle.all:active {
+    background-color: var(--secondary-button-active-color);
+  }
+
+  .list-number:hover {
+    background-color: var(--third-color-hover);
+  }
+
+  .list-number.active:hover {
+    background-color: var(--fourth-color-hover);
+  }
+
+  .audio-button:hover {
+    background-color: var(--background-color1);
+  }
+
+  .audio-button:active {
+    background-color: var(--font-shadow-color);
   }
 
   header {

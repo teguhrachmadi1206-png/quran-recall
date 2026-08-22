@@ -3,6 +3,7 @@
 import { useRef, useEffect, useState } from "react";
 import { SurahData } from "@/types/quran";
 import { DisplayData, DetailConfig, Language } from "@/types/config";
+import elementsText from "@/lib/text";
 
 interface DetailSectionProps {
     surahData: SurahData | undefined
@@ -106,20 +107,28 @@ const DetailSection = ({ surahData, config, setConfig, sessionData, language }: 
     return (
         <section className="detail-section">
             {audioSrc && sessionData.currentAyah && <audio ref={audioRef} src={audioSrc} onEnded={() => setIsAudioPlayed(false)} />}
-            <h2 className="sub-title">Ayah Detail</h2>
+            <h2 className="sub-title">{elementsText[language].subTitle3}</h2>
             <div className="display-ayah">
                 <div className="detail-btn-container">
-                    <button className="main-btn toggle" onClick={toggleArabicHandler}>Show Arabic</button>
-                    <button className="main-btn toggle" onClick={toggleLatinHandler}>Show Latin</button>
-                    <button className="main-btn toggle" onClick={toggleTranslationHandler}>Show Translation</button>
-                    <button className="main-btn toggle all" onClick={toggleAllHandler}>Show All</button>
+                    <button className="main-btn toggle" onClick={toggleArabicHandler}>
+                        {elementsText[language].arabicBtn[`${config.displayArabic ? 'hide' : 'show'}`]}
+                    </button>
+                    <button className="main-btn toggle" onClick={toggleLatinHandler}>
+                        {elementsText[language].latinBtn[`${config.displayLatin ? 'hide' : 'show'}`]}
+                    </button>
+                    <button className="main-btn toggle" onClick={toggleTranslationHandler}>
+                        {elementsText[language].translationBtn[`${config.displayTranslation ? 'hide' : 'show'}`]}
+                    </button>
+                    <button className="main-btn toggle all" onClick={toggleAllHandler}>
+                        {elementsText[language].showAllBtn[`${(config.displayTranslation || config.displayArabic || config.displayLatin) ? 'hide' : 'show'}`]}
+                    </button>
                 </div>
                 <div className="show-detail">
                     <div className="detail-title-row">
                         {(config.displayArabic || config.displayLatin || config.displayTranslation) && <h3 className="detail-title" >
                             <span>{surahData?.number}.</span><span>{surahData?.title} ({surahData?.titleTranslation}): {sessionData?.currentAyah}</span>
                         </h3>}
-                        {config.displayArabic && <button className='audio-button' onClick={toggleAudio}>▶ Audio</button>}
+                        {config.displayArabic && <button className='audio-button' onClick={toggleAudio}>{`${isAudioPlayed ? '◼' : '▶'}`} Audio</button>}
                     </div>
                     <div className="show-ayah">
                         <span className="span-ref" ref={arabicStartRef}></span>
