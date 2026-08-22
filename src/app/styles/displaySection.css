@@ -62,5 +62,11 @@
     .list-number.active:hover {
         background-color: var(--fourth-color-hover);
     }
+}
 
+@media screen and (max-height: 600px) {
+    .display-list {
+        height: 50%;
+        overflow-y: scroll;
+    }
 }

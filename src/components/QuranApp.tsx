@@ -11,7 +11,7 @@ import Options from "./Options";
 import elementsText from "@/lib/text";
 
 export default function QuranApp() {
-    const [language, setLanguage] = useState<Language>("id")
+    const [language, setLanguage] = useState<Language>("en")
     const [isOptionOpened, setIsOptionOpened] = useState(false)
     const [surahList, setSurahList] = useState<SurahHead[]>([])
     const [selectedSurah, setSelectedSurah] = useState("0")

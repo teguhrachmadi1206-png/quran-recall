@@ -26,11 +26,12 @@ export default function Header({ setIsOptionOpened, language, setLanguage }: Hea
                         <span>ID</span>
                     </div>
                 </div>
-                <div className="options-icon" onClick={() => setIsOptionOpened(true)}>
+                <button className="about-btn" onClick={() => setIsOptionOpened(true)}>About</button>
+                {/* <div className="options-icon" onClick={() => setIsOptionOpened(true)}>
                     <div className="bullet"></div>
                     <div className="bullet"></div>
                     <div className="bullet"></div>
-                </div>
+                </div> */}
             </div>
         </header>
     )

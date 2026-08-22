@@ -61,6 +61,14 @@ header {
     color: var(--background-color1);
 }
 
+.about-btn {
+    border: 1px solid var(--main-font-color);
+    border-radius: 2em;
+    padding: 0.3em 0.7em;
+    color: var(--main-font-color);
+    background: none;
+}
+
 .options-icon {
     width: 2em;
     height: 2em;
@@ -89,12 +97,25 @@ header {
         max-width: 1000px;
     }
 
+    .menu-container {
+        padding: 0 3em;
+        top: 40%;
+    }
+
     .flag:hover {
         background-color: var(--background-color2);
+        cursor: pointer;
     }
 
     .flag.active:hover {
         background-color: var(--main-font-color);
+    }
+
+    .about-btn:hover {
+        background-color: var(--main-font-color);
+        border: 1px solid var(--secondary-button-color);
+        color: var(--background-color1);
+        cursor: pointer;
     }
 
     .options-icon:hover {

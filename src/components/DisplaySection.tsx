@@ -24,10 +24,9 @@ export default function DisplaySection({
 }: DisplaySectionProps) {
     const listEndRef = useRef<HTMLSpanElement>(null)
 
-
     useEffect(() => {
         if (data.ayahList.length > 0) {
-            listEndRef.current?.scrollIntoView({ behavior: "smooth", block: "center" })
+            listEndRef.current?.scrollIntoView({ behavior: "smooth", block: "end" })
         }
     }, [data.history])
 
@@ -77,7 +76,7 @@ export default function DisplaySection({
                         )
                         : null
                     }
-                    <span ref={listEndRef}></span>
+                    <span className="span-ref" ref={listEndRef}></span>
                 </div>
                 {data.currentAyah > 0 && <h2 className="main-number">{data.currentAyah}</h2>}
             </div>

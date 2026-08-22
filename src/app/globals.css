@@ -163,12 +163,8 @@ option {
   font-weight: normal;
 }
 
-label {
-  width: 60px;
-  font-size: 0.8em;
-  font-weight: normal;
-  text-align: start;
-  padding: 0 0 0 0.25em;
+.span-ref {
+  height: 2em;
 }
 
 @media screen and (max-height: 600px) {
@@ -177,15 +173,20 @@ label {
     max-width: 500px;
     height: 100vh;
     position: relative;
+    font-size: 0.8em;
+    overflow-y: hidden;
   }
 
   .main {
     height: 100%;
-    overflow-y: scroll;
   }
 
   .detail-section {
     height: 100%;
+  }
+
+  select {
+    font-size: 0.8em;
   }
 }
 
@@ -230,12 +231,12 @@ label {
     grid-area: detail;
     height: 100%;
     margin: 0;
-    padding: 0 1em 0 0
   }
 
   .main-btn:hover {
     background: var(--main-button-hover-color);
     color: var(--main-button-hover-font-color);
+    cursor: pointer;
   }
 
   .main-btn:active {
