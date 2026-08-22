@@ -1,10 +1,11 @@
 import type { SurahEN, SurahID, SurahHead, SurahData, AyahEN, AyahID, AyahData } from "@/types/quran"
+import elementsText from "./text"
 
-export async function getSurahENList(): Promise<SurahHead[]> {
+export async function getSurahENList(setMessage: React.Dispatch<React.SetStateAction<string>>): Promise<SurahHead[]> {
     const response = await fetch("https://equran.id/api/en/surah")
 
     if (!response.ok) {
-        throw new Error("Failed to fetch surah list")
+        throw new Error(elementsText['en'].message.fetchListFail)
     }
 
     const data = await response.json()
@@ -18,11 +19,11 @@ export async function getSurahENList(): Promise<SurahHead[]> {
     return numberAndTitle
 }
 
-export async function getSurahIDList(): Promise<SurahHead[]> {
+export async function getSurahIDList(setMessage: React.Dispatch<React.SetStateAction<string>>): Promise<SurahHead[]> {
     const response = await fetch("https://equran.id/api/v2/surat")
 
     if (!response.ok) {
-        throw new Error("Gagal mengambil daftar surat")
+        throw new Error(elementsText['id'].message.fetchListFail)
     }
 
     const data = await response.json()
@@ -35,11 +36,11 @@ export async function getSurahIDList(): Promise<SurahHead[]> {
     return numberAndTitle
 }
 
-export async function getSurahDetailEN(surahNumber: string): Promise<SurahData> {
+export async function getSurahDetailEN(surahNumber: string, setMessage: React.Dispatch<React.SetStateAction<string>>): Promise<SurahData> {
     const response = await fetch(`https://equran.id/api/en/surah/${surahNumber}`)
 
     if (!response.ok) {
-        throw new Error("Failed to fetch surah data")
+        throw new Error(elementsText['en'].message.fetchSurahFail)
     }
 
     const data = await response.json()
@@ -65,11 +66,11 @@ export async function getSurahDetailEN(surahNumber: string): Promise<SurahData> 
     return surahData
 }
 
-export async function getSurahDetailID(surahNumber: string): Promise<SurahData> {
+export async function getSurahDetailID(surahNumber: string, setMessage: React.Dispatch<React.SetStateAction<string>>): Promise<SurahData> {
     const response = await fetch(`https://equran.id/api/v2/surat/${surahNumber}`)
 
     if (!response.ok) {
-        throw new Error("Failed to fetch surah data")
+        throw new Error(elementsText['id'].message.fetchSurahFail)
     }
 
     const data = await response.json()

@@ -16,6 +16,7 @@ interface InputSectionProps {
     setDetailConfig: React.Dispatch<React.SetStateAction<DetailConfig>>
     language: Language
     setMessage: React.Dispatch<React.SetStateAction<string>>
+    isFetching: boolean
 }
 
 export default function InputSection({
@@ -29,7 +30,8 @@ export default function InputSection({
     setDisplayData,
     setDetailConfig,
     language,
-    setMessage
+    setMessage,
+    isFetching
 }: InputSectionProps) {
     const ayahRange = surahData && Array.from({ length: surahData.numberOfAyahs }, (_, i) => i + 1)
     const isLastSurah = Number(surah) === 114
@@ -173,12 +175,18 @@ export default function InputSection({
                 </div>
             </div>
             <div className="input-buttons-container">
-                <button className="main-btn" onClick={mainButtonHandler}>
+                <button
+                    className={`main-btn${isFetching ? ' disabled' : ''}`}
+                    onClick={mainButtonHandler}
+                    disabled={isFetching}>
                     {displayData.currentAyah > 0
                         ? elementsText[language].generateBtn.next
                         : elementsText[language].generateBtn.generate}
                 </button>
-                {isSessionFinished && <button className="main-btn" onClick={nextSurahHandler}>
+                {isSessionFinished && <button
+                    className={`main-btn${isFetching ? ' disabled' : ''}`}
+                    onClick={nextSurahHandler}
+                    disabled={isFetching}>
                     {elementsText[language].nextSurahBtn}
                 </button>}
             </div>

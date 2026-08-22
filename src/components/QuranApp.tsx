@@ -8,6 +8,7 @@ import InputSection from "@/components/InputSection";
 import DisplaySection from "@/components/DisplaySection";
 import DetailSection from "@/components/DetailSection";
 import Options from "./Options";
+import elementsText from "@/lib/text";
 
 export default function QuranApp() {
     const [language, setLanguage] = useState<Language>("id")
@@ -18,43 +19,64 @@ export default function QuranApp() {
     const [inputConfig, setInputConfig] = useState<InputConfig>({ firstAyah: 1, lastAyah: 1, noRepeat: true })
     const [displayData, setDisplayData] = useState<DisplayData>({ ayahList: [], currentIndex: 0, currentAyah: 0, history: [] })
     const [detailConfig, setDetailConfig] = useState({ displayArabic: false, displayLatin: false, displayTranslation: false })
+    const [isFetching, setIsFetching] = useState(false)
     const [message, setMessage] = useState("")
 
     useEffect(() => {
         async function fetchSurahList() {
+            setIsFetching(true)
             let datas
-            switch (language) {
-                case "id":
-                    datas = await getSurahIDList()
-                    break
-                case "en":
-                    datas = await getSurahENList()
-                    break
+            try {
+                switch (language) {
+                    case "id":
+                        datas = await getSurahIDList(setMessage)
+                        break
+                    case "en":
+                        datas = await getSurahENList(setMessage)
+                        break
+                }
+                setSurahList(datas)
+            } catch (err) {
+                if (err instanceof Error) {
+                    setMessage(elementsText[language].message.fetchListFail)
+                } else {
+                    setMessage(elementsText[language].message.unknownError)
+                }
+            } finally {
+                setIsFetching(false)
             }
-            setSurahList(datas)
         }
         fetchSurahList()
     }, [language])
 
     useEffect(() => {
         async function fetchSurahData() {
-            let data
-            switch (language) {
-                case "id":
-                    data = await getSurahDetailID(selectedSurah)
-                    break
-                case "en":
-                    data = await getSurahDetailEN(selectedSurah)
-                    break
+            setIsFetching(true)
+            try {
+                let data
+                switch (language) {
+                    case "id":
+                        data = await getSurahDetailID(selectedSurah, setMessage)
+                        break
+                    case "en":
+                        data = await getSurahDetailEN(selectedSurah, setMessage)
+                        break
+                }
+                if (surahData?.number !== data.number) {
+                    setSurahData(data)
+                    setInputConfig({ firstAyah: 1, lastAyah: data.numberOfAyahs, noRepeat: true })
+                } else {
+                    setSurahData(data)
+                }
+            } catch (err) {
+                if (err instanceof Error) {
+                    setMessage(elementsText[language].message.fetchSurahFail)
+                } else {
+                    setMessage(elementsText[language].message.unknownError)
+                }
+            } finally {
+                setIsFetching(false)
             }
-            if (surahData?.number !== data.number) {
-                setSurahData(data)
-                setInputConfig({ firstAyah: 1, lastAyah: data.numberOfAyahs, noRepeat: true })
-            } else {
-                setSurahData(data)
-            }
-
-
         }
         if (selectedSurah !== "0") {
             fetchSurahData()
@@ -98,7 +120,8 @@ export default function QuranApp() {
                     setDisplayData={setDisplayData}
                     setDetailConfig={setDetailConfig}
                     language={language}
-                    setMessage={setMessage} />
+                    setMessage={setMessage}
+                    isFetching={isFetching} />
                 <DisplaySection
                     inputConfig={inputConfig}
                     data={displayData}

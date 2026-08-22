@@ -35,6 +35,9 @@ const elementsText = {
             chooseSurah: "Please choose a surah first",
             invalidNumber: "Invalid number input",
             noNumber: "No number left",
+            fetchListFail: "Failed to fetch surah list",
+            fetchSurahFail: "Failed to fetch surah data",
+            unknownError: "An unknown error occurred"
         },
         howToDesc: {
             header: "How to Use – Quran Recall",
@@ -100,6 +103,9 @@ const elementsText = {
             chooseSurah: "Silakan pilih surat terlebih dahulu",
             invalidNumber: "Input nomor tidak valid",
             noNumber: "Tidak ada nomor tersisa",
+            fetchListFail: "Gagal mengambil daftar surat",
+            fetchSurahFail: "Gagal mengambil data surat",
+            unknownError: "Terjadi error yang tidak diketahui"
         },
         howToDesc: {
             header: "Cara Penggunaan – Quran Recall",
