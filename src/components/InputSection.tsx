@@ -1,8 +1,7 @@
-'use client'
-
-import { useState } from "react";
-import { SurahList, SurahHead, SurahData, InputConfig, DisplayData } from "@/types/quran";
+import { SurahList, SurahHead, SurahData } from "@/types/quran";
+import { DetailConfig, DisplayData, InputConfig, Language } from "@/types/config";
 import { generateRandomList, generateRandomNumber } from "@/lib/hooks";
+import elementsText from "@/lib/text"
 
 interface InputSectionProps {
     surahList: SurahList
@@ -13,6 +12,8 @@ interface InputSectionProps {
     setConfig: React.Dispatch<React.SetStateAction<InputConfig>>
     displayData: DisplayData
     setDisplayData: React.Dispatch<React.SetStateAction<DisplayData>>
+    setDetailConfig: React.Dispatch<React.SetStateAction<DetailConfig>>
+    language: Language
 }
 
 export default function InputSection({
@@ -23,7 +24,9 @@ export default function InputSection({
     config,
     setConfig,
     displayData,
-    setDisplayData
+    setDisplayData,
+    setDetailConfig,
+    language
 }: InputSectionProps) {
     const ayahRange = surahData && Array.from({ length: surahData.numberOfAyahs }, (_, i) => i + 1)
     const isSessionFinished = config.firstAyah === 1 && config.lastAyah === surahData?.numberOfAyahs
@@ -61,6 +64,11 @@ export default function InputSection({
                 currentAyah: prev.ayahList[prev.currentIndex + 1],
                 history: [...prev.history, prev.ayahList[prev.currentIndex + 1]]
             }))
+            setDetailConfig({
+                displayArabic: false,
+                displayLatin: false,
+                displayTranslation: false,
+            })
         }
     }
 
@@ -71,6 +79,11 @@ export default function InputSection({
             currentAyah: current,
             history: [...prev.history, current]
         }))
+        setDetailConfig({
+            displayArabic: false,
+            displayLatin: false,
+            displayTranslation: false,
+        })
     }
 
     function mainButtonHandler() {
@@ -99,7 +112,7 @@ export default function InputSection({
 
     return (
         <section className="input-section">
-            <h2 className="sub-title">Surah:</h2>
+            <h2 className="sub-title">{elementsText[language].subTitle1}</h2>
             <div className="input-data">
                 <div className="select-container">
                     <select
@@ -108,7 +121,7 @@ export default function InputSection({
                         onChange={(e) => selectSurah(e.currentTarget.value)}
                         value={surah}
                     >
-                        <option value={0} disabled hidden>-- Choose Surah --</option>
+                        <option value={0} disabled hidden>{elementsText[language].selectSurah}</option>
                         {surahList.map((surah: SurahHead) =>
                             <option key={surah.number} value={surah.number}>{surah.number}. {surah.title}</option>
                         )}
@@ -148,13 +161,17 @@ export default function InputSection({
                             noRepeat: !prev.noRepeat
                         }))}
                         checked={config.noRepeat} />
-                    <label htmlFor="no-repeat">No Repeat</label>
+                    <label htmlFor="no-repeat">{elementsText[language].noRepeat}</label>
                 </div>
             </div>
             <div className="buttons">
-                <button className="main-btn" onClick={mainButtonHandler}>Generate
+                <button className="main-btn" onClick={mainButtonHandler}>
+                    {displayData.currentAyah > 0
+                        ? elementsText[language].generateBtn.next
+                        : elementsText[language].generateBtn.generate}
                 </button>
-                {isSessionFinished && !isLastSurah && <button className="main-btn" onClick={nextSurahHandler}>Next Surah
+                {isSessionFinished && !isLastSurah && <button className="main-btn" onClick={nextSurahHandler}>
+                    {elementsText[language].nextSurahBtn}
                 </button>}
             </div>
         </section>

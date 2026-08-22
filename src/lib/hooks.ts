@@ -17,3 +17,4 @@ export function generateRandomNumber(firstNum: number, secondNum: number) {
     const random = Math.floor(Math.random() * (secondNum - firstNum + 1)) + firstNum
     return random
 }
+

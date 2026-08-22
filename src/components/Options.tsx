@@ -1,17 +1,23 @@
-import React from 'react'
+import { Language } from "@/types/config"
 
-const Options = () => {
+interface OptionsProps {
+    setIsOptionOpened: React.Dispatch<React.SetStateAction<boolean>>
+    language: Language
+    setLanguage: React.Dispatch<React.SetStateAction<Language>>
+}
+
+export default function Options({ setIsOptionOpened, language, setLanguage }: OptionsProps) {
     return (
         <div className="options-box">
             <div className="options-header">
                 <div className="lang-container">
                     <label htmlFor="select-lang">text.language</label>
-                    <select name="language" id="select-lang" className="select-lang">
-                        <option value="english">English</option>
-                        <option value="indonesia">Indonesia</option>
+                    <select name="language" id="select-lang" className="select-lang" value={language} onChange={(e) => setLanguage(e.currentTarget.value as Language)}>
+                        <option value="en">English</option>
+                        <option value="id">Indonesia</option>
                     </select>
                 </div>
-                <button className="main-btn how-to-btn">text.closeOptions</button>
+                <button className="main-btn how-to-btn" onClick={() => setIsOptionOpened(false)}>text.closeOptions</button>
             </div>
             <div className="how-to-use-header">
                 <h2 className="how-to-main-header">text.howToDesc.header<span>text.howToDesc.version</span></h2>
@@ -37,5 +43,3 @@ const Options = () => {
         </div>
     )
 }
-
-export default Options

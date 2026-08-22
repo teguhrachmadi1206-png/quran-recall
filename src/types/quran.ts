@@ -1,5 +1,5 @@
 
-type Audio = {
+interface AyahAudio {
     [audioId: string]: string
 }
 
@@ -8,7 +8,7 @@ export type AyahEN = {
     textArabic: string
     textLatin: string
     textEnglish: string
-    audio: Audio[]
+    audio: AyahAudio
 }
 
 type OtherSurahEN = {
@@ -23,7 +23,7 @@ export type AyahID = {
     teksArab: string
     teksLatin: string
     teksIndonesia: string
-    audio: Audio[]
+    audio: AyahAudio
 }
 
 type OtherSurahID = {
@@ -40,7 +40,7 @@ export type SurahEN = {
     englishNameTranslation: string
     numberOfAyahs: number
     revelationType: string
-    audioFull: Audio[]
+    audioFull: AyahAudio
 }
 
 export type SurahDetailEN = {
@@ -50,7 +50,7 @@ export type SurahDetailEN = {
     englishNameTranslation: string
     numberOfAyahs: number
     revelationType: string
-    audioFull: Audio[]
+    audioFull: AyahAudio
     ayahs: AyahEN[]
     nextSurah?: OtherSurahEN | false
     previousSurah?: OtherSurahEN | false
@@ -64,7 +64,7 @@ export type SurahID = {
     tempatTurun: string
     arti: string
     deskripsi: string
-    audioFull: Audio[]
+    audioFull: AyahAudio
 }
 
 export type SurahDetailID = {
@@ -75,7 +75,7 @@ export type SurahDetailID = {
     tempatTurun: string
     arti: string
     deskripsi: string
-    audioFull: Audio[]
+    audioFull: AyahAudio
     ayat: AyahID[]
     suratSelanjutnya?: OtherSurahID | false
     suratSebelumnya?: OtherSurahID | false
@@ -93,7 +93,7 @@ export type AyahData = {
     arabic: string
     latin: string
     translation: string
-    audio: Audio[]
+    audio: AyahAudio
 }
 
 export type SurahData = {
@@ -103,18 +103,3 @@ export type SurahData = {
     numberOfAyahs: number
     ayahs: AyahData[]
 }
-
-export type InputConfig = {
-    firstAyah: number
-    lastAyah: number
-    noRepeat: boolean
-}
-
-export type DisplayData = {
-    ayahList: number[]
-    currentAyah: number
-    currentIndex: number
-    history: number[]
-}
-
-export type Language = "en" | "id"

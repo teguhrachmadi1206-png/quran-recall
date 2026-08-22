@@ -29,7 +29,7 @@
   --arabic-text-font-size: 1.8em;
   --main-element-width: 95%;
   --main-element-margin: 0 0 0.3em 0;
-  --header-height: 120px;
+  --header-height: 100px;
   --input-section-height: 100px;
   --display-section-height: 150px;
   --footer-height: 0px;
@@ -92,7 +92,7 @@ header {
 
 .main {
   width: 100%;
-  height: calc(100% - var(--header-height) - var(--footer-height) - 15px);
+  height: calc(100vh - var(--header-height) - var(--footer-height) - 15px);
   display: flex;
   flex-direction: column;
   justify-content: start;
@@ -185,6 +185,7 @@ header {
   width: 90%;
   margin: 0 auto;
   font-weight: normal;
+  font-style: italic;
 }
 
 .title {
@@ -253,11 +254,17 @@ section {
   margin: 0 auto;
 }
 
-
 .show-ayah {
   height: 100%;
   overflow-y: scroll;
   padding: 0 1em;
+  margin-bottom: 1em;
+  scroll-padding-bottom: 100px;
+}
+
+.span-ref {
+  scroll-margin-bottom: 100px;
+
 }
 
 p {
@@ -308,6 +315,11 @@ option {
   padding: 0.7em 1em;
 }
 
+.main-btn:hover {
+  background: var(--main-button-hover-color);
+  color: var(--main-button-hover-font-color);
+}
+
 .main-btn:active {
   background-color: var(--main-button-active-color);
 }
@@ -339,6 +351,11 @@ option {
   color: var(--secondary-button-font-color)
 }
 
+.main-btn.toggle.all:hover {
+  background-color: var(--secondary-button-hover-color);
+  color: var(--secondary-button-hover-font-color);
+}
+
 .main-btn.toggle.all:active {
   background-color: var(--secondary-button-active-color);
 }
@@ -365,6 +382,10 @@ option {
   align-items: center;
   justify-content: center;
   cursor: pointer;
+}
+
+.list-number:hover {
+  background-color: rgba(50, 150, 50, 0.4);
 }
 
 .display-list {
@@ -628,19 +649,5 @@ label {
     min-height: 73px;
     max-height: 300px;
     overflow-y: scroll;
-  }
-
-  .main-btn:hover {
-    background: var(--main-button-hover-color);
-    color: var(--main-button-hover-font-color);
-  }
-
-  .main-btn.toggle.all:hover {
-    background-color: var(--secondary-button-hover-color);
-    color: var(--secondary-button-hover-font-color);
-  }
-
-  .list-number:hover {
-    background-color: rgba(50, 150, 50, 0.4);
   }
 }

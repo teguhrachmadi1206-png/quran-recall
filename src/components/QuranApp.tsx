@@ -1,20 +1,23 @@
 'use client'
 import { useState, useEffect } from "react"
-import { SurahHead, SurahData, InputConfig, Language, DisplayData } from "@/types/quran";
+import { SurahHead, SurahData } from "@/types/quran";
+import { DisplayData, InputConfig, Language } from "@/types/config";
 import { getSurahDetailEN, getSurahDetailID, getSurahENList, getSurahIDList } from "@/lib/quran"
 import Header from "@/components/Header";
 import InputSection from "@/components/InputSection";
 import DisplaySection from "@/components/DisplaySection";
 import DetailSection from "@/components/DetailSection";
+import Options from "./Options";
 
 export default function QuranApp() {
     const [language, setLanguage] = useState<Language>("id")
+    const [isOptionOpened, setIsOptionOpened] = useState(false)
     const [surahList, setSurahList] = useState<SurahHead[]>([])
     const [selectedSurah, setSelectedSurah] = useState("0")
     const [surahData, setSurahData] = useState<SurahData>()
     const [inputConfig, setInputConfig] = useState<InputConfig>({ firstAyah: 1, lastAyah: 1, noRepeat: true })
     const [displayData, setDisplayData] = useState<DisplayData>({ ayahList: [], currentIndex: 0, currentAyah: 0, history: [] })
-    const [detailConfig, setDetailConfig] = useState()
+    const [detailConfig, setDetailConfig] = useState({ displayArabic: false, displayLatin: false, displayTranslation: false })
 
     useEffect(() => {
         async function fetchSurahList() {
@@ -43,25 +46,34 @@ export default function QuranApp() {
                     data = await getSurahDetailEN(selectedSurah)
                     break
             }
-            setSurahData(data)
-            setInputConfig({ firstAyah: 1, lastAyah: data.numberOfAyahs, noRepeat: true })
+            if (surahData?.number !== data.number) {
+                setSurahData(data)
+                setInputConfig({ firstAyah: 1, lastAyah: data.numberOfAyahs, noRepeat: true })
+            } else {
+                setSurahData(data)
+            }
+
+
         }
         if (selectedSurah !== "0") {
             fetchSurahData()
         }
-    }, [selectedSurah])
+    }, [selectedSurah, language])
 
     useEffect(() => {
         clearSession()
-    }, [language, selectedSurah, inputConfig])
+    }, [selectedSurah, inputConfig])
 
     function clearSession() {
         setDisplayData({ ayahList: [], currentIndex: 0, currentAyah: 0, history: [] })
+        setDetailConfig({ displayArabic: false, displayLatin: false, displayTranslation: false })
     }
 
     return (
         <>
-            <Header />
+            <Header
+                setIsOptionOpened={setIsOptionOpened}
+                language={language} />
             <div className="main">
                 <InputSection
                     surahList={surahList}
@@ -71,13 +83,24 @@ export default function QuranApp() {
                     config={inputConfig}
                     setConfig={setInputConfig}
                     displayData={displayData}
-                    setDisplayData={setDisplayData} />
+                    setDisplayData={setDisplayData}
+                    setDetailConfig={setDetailConfig}
+                    language={language} />
                 <DisplaySection
                     inputConfig={inputConfig}
-                    data={displayData} />
+                    data={displayData}
+                    language={language} />
                 <DetailSection
                     sessionData={displayData}
-                    surahData={surahData} />
+                    config={detailConfig}
+                    setConfig={setDetailConfig}
+                    surahData={surahData}
+                    language={language} />
+                {isOptionOpened &&
+                    <Options
+                        setIsOptionOpened={setIsOptionOpened}
+                        language={language}
+                        setLanguage={setLanguage} />}
             </div>
         </>
     )
