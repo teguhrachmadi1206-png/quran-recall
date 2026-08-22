@@ -4,6 +4,7 @@
   --main-font-color: wheat;
   --sub-font-color: ghostwhite;
   --line-color: rgba(248, 248, 255, 0.8);
+  --main-font-shadow-color: rgb(4, 41, 32);
   --font-shadow-color: rgb(102, 96, 16);
   --select-border-color: rgba(144, 238, 144, 0.678);
   --main-button-color: rgb(171, 248, 216);
@@ -20,6 +21,7 @@
   --third-color-hover: rgba(50, 150, 50, 0.4);
   --fourth-color: rgba(170, 120, 30, 0.6);
   --fourth-color-hover: rgba(170, 120, 30, 0.8);
+  --gold-metallic-color: linear-gradient(75deg, #fcd68b 0%, #faf5c4 25%, #f5d389 50%, #f7f1b1 75%, #fad38f 100%);
   --select-option-color: black;
   --message-font-color: wheat;
   --message-background-color: rgba(1, 26, 13, 0.9);
@@ -68,10 +70,18 @@ header {
   margin: 0 auto;
 }
 
-.options-icon {
+.menu-container {
   position: absolute;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0 1em;
   top: 15%;
-  right: 5%;
+  height: auto;
+}
+
+.options-icon {
   width: 2em;
   height: 2em;
   display: flex;
@@ -131,6 +141,7 @@ header {
   justify-content: center;
   align-items: center;
   gap: 1.5em;
+  z-index: 5;
 }
 
 .options-header {
@@ -149,6 +160,30 @@ header {
   text-align: center;
 }
 
+.flag-container {
+  display: flex;
+  border: 1px solid var(--main-font-color);
+  border-radius: 2em;
+}
+
+.flag {
+  width: 2em;
+  font-size: 0.8em;
+  padding: 0.2em 0;
+  border-radius: 2em;
+}
+
+.flag>span {
+  padding: 0.4em 0.2em;
+}
+
+.flag.active {
+  background-color: var(--main-font-color);
+  z-index: 2;
+  border-radius: 2em;
+  color: var(--background-color1);
+}
+
 .lang-container {
   border-radius: 0.5em;
   display: flex;
@@ -162,6 +197,13 @@ header {
   height: 95%;
   width: 95%;
   overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.how-to-desc-item {
+  width: 100%;
 }
 
 .how-to-main-header {
@@ -171,6 +213,7 @@ header {
 }
 
 .how-to-sub-header {
+  width: 100%;
   color: var(--message-font-color);
   font-size: var(--sub-title-font-size);
   border-bottom: 1px solid var(--message-font-color);
@@ -178,11 +221,13 @@ header {
 }
 
 .how-to-desc {
+  width: 100%;
   color: var(--sub-font-color);
   font-size: var(--text-font-size);
   font-weight: 400;
   margin-bottom: 0.5em;
   margin-left: 0.5em;
+  margin-right: 1em;
 }
 
 .title-desc {
@@ -190,6 +235,7 @@ header {
   margin: 0 auto;
   font-weight: normal;
   font-style: italic;
+  font-size: 0.8em;
 }
 
 .title {
@@ -408,7 +454,10 @@ option {
 
 .main-number {
   font-size: var(--main-number-font-size);
-  color: var(--main-font-color);
+  color: transparent;
+  background: var(--gold-metallic-color);
+  background-clip: text;
+  -webkit-background-clip: text;
 }
 
 .message {
@@ -452,8 +501,10 @@ label {
 
 .arabic-ayah {
   text-align: end;
-  color: var(--main-font-color);
-  text-shadow: 0 0 3px var(--font-shadow-color);
+  color: transparent;
+  background: var(--gold-metallic-color);
+  background-clip: text;
+  -webkit-background-clip: text;
   font-size: var(--arabic-text-font-size);
   margin-bottom: 0.5em;
   line-height: 1.5em;
@@ -550,6 +601,14 @@ label {
     width: 90%;
   }
 
+  .flag:hover {
+    background-color: var(--background-color2);
+  }
+
+  .flag.active:hover {
+    background-color: var(--main-font-color);
+  }
+
   .options-icon:hover {
     background-color: var(--secondary-button-hover-color);
   }
@@ -558,9 +617,13 @@ label {
     background-color: var(--secondary-button-color);
   }
 
+  .how-to-desc-container {
+    width: 90%;
+  }
+
   .how-to-sub-header {
     font-size: var(--number-list-font-size);
-    width: 90%;
+    width: 100%;
   }
 
   .how-to-desc {
@@ -569,7 +632,8 @@ label {
     font-weight: 400;
     margin-bottom: 0.5em;
     margin-left: 0;
-    width: 90%;
+    margin-right: 0;
+    width: 100%;
   }
 
   .main {

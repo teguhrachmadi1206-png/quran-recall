@@ -84,7 +84,8 @@ export default function QuranApp() {
         <>
             <Header
                 setIsOptionOpened={setIsOptionOpened}
-                language={language} />
+                language={language}
+                setLanguage={setLanguage} />
             <div className="main">
                 <InputSection
                     surahList={surahList}

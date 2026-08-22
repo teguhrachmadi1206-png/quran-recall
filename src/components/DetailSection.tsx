@@ -27,16 +27,16 @@ const DetailSection = ({ surahData, config, setConfig, sessionData, language }: 
             .replace(/[ۚ]/g, "ۚ ")
 
     useEffect(() => {
-        arabicStartRef.current?.scrollIntoView({ behavior: "smooth", block: "start" })
-    }, [config.displayArabic])
+        translationStartRef.current?.scrollIntoView({ behavior: "smooth", block: "start" })
+    }, [config.displayTranslation])
 
     useEffect(() => {
         latinStartRef.current?.scrollIntoView({ behavior: "smooth", block: "start" })
     }, [config.displayLatin])
 
     useEffect(() => {
-        translationStartRef.current?.scrollIntoView({ behavior: "smooth", block: "start" })
-    }, [config.displayTranslation])
+        arabicStartRef.current?.scrollIntoView({ behavior: "smooth", block: "start" })
+    }, [config.displayArabic])
 
     function toggleArabicHandler() {
         if (sessionData.currentAyah > 0) {

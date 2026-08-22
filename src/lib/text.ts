@@ -65,7 +65,7 @@ const elementsText = {
         copyright: "© 2026 Teguh Rachmadi. All Rights Reserved",
     },
     id: {
-        desc: "Uji hafalan Quranmu, per ayat satu demi satu",
+        desc: "Uji hafalan Quranmu per ayat, satu demi satu",
         language: "Bahasa:",
         howToUse: "Cara Penggunaaan",
         closeOptions: "Tutup",
