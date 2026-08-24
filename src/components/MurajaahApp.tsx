@@ -1,18 +1,16 @@
 'use client'
 import { useState, useEffect } from "react"
+import { useMenu } from "@/app/context/MenuContext";
 import { SurahHead, SurahData } from "@/types/quran";
-import { DisplayData, InputConfig, Language } from "@/types/config";
+import { DisplayData, InputConfig } from "@/types/config";
 import { getSurahDetailEN, getSurahDetailID, getSurahENList, getSurahIDList } from "@/lib/quran"
-import Header from "@/components/Header";
 import InputSection from "@/components/InputSection";
 import DisplaySection from "@/components/DisplaySection";
 import DetailSection from "@/components/DetailSection";
-import Options from "./Options";
 import elementsText from "@/lib/text";
 
-export default function QuranApp() {
-    const [language, setLanguage] = useState<Language>("en")
-    const [isOptionOpened, setIsOptionOpened] = useState(false)
+export default function MurajaahApp() {
+    const { language, setLanguage } = useMenu()
     const [surahList, setSurahList] = useState<SurahHead[]>([])
     const [selectedSurah, setSelectedSurah] = useState("0")
     const [surahData, setSurahData] = useState<SurahData>()
@@ -104,10 +102,6 @@ export default function QuranApp() {
 
     return (
         <>
-            <Header
-                setIsOptionOpened={setIsOptionOpened}
-                language={language}
-                setLanguage={setLanguage} />
             <div className="main">
                 <InputSection
                     surahList={surahList}
@@ -135,11 +129,6 @@ export default function QuranApp() {
                     setConfig={setDetailConfig}
                     surahData={surahData}
                     language={language} />
-                {isOptionOpened &&
-                    <Options
-                        setIsOptionOpened={setIsOptionOpened}
-                        language={language}
-                        setLanguage={setLanguage} />}
                 {message && <p className="message">{message}</p>}
             </div>
         </>

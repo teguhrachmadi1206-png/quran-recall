@@ -176,7 +176,7 @@ export default function InputSection({
             </div>
             <div className="input-buttons-container">
                 <button
-                    className={`main-btn${isFetching ? ' disabled' : ''}`}
+                    className={`main-btn gold${isFetching ? ' disabled' : ''}`}
                     onClick={mainButtonHandler}
                     disabled={isFetching}>
                     {displayData.currentAyah > 0

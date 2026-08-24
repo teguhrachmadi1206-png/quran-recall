@@ -5,6 +5,9 @@ const elementsText = {
         howToUse: "How to Use",
         closeOptions: "Close",
         selectSurah: "-- Choose surah --",
+        start: "Start Murajaah",
+        daily: "Daily Dhikr",
+        another: "Get Another",
         subTitle1: "Surah:",
         subTitle2: "Ayah Number:",
         subTitle3: "Ayah Detail:",
@@ -40,7 +43,7 @@ const elementsText = {
             unknownError: "An unknown error occurred"
         },
         howToDesc: {
-            header: "How to Use – Quran Recall",
+            header: "How to Use",
             version: " (Ver1.4)",
             mainDesc:
                 "Follow the steps below to generate random verses from the Quran easily:",
@@ -73,6 +76,9 @@ const elementsText = {
         howToUse: "Cara Penggunaaan",
         closeOptions: "Tutup",
         selectSurah: "-- Pilih surat --",
+        start: "Mulai Murajaah",
+        daily: "Dzikir Harian",
+        another: "Ayat Lainnya",
         subTitle1: "Surat:",
         subTitle2: "Nomor Ayat:",
         subTitle3: "Detil Ayat:",
@@ -108,7 +114,7 @@ const elementsText = {
             unknownError: "Terjadi error yang tidak diketahui"
         },
         howToDesc: {
-            header: "Cara Penggunaan – Quran Recall",
+            header: "Cara Penggunaan",
             version: " (Ver1.4)",
             mainDesc:
                 "Ikuti langkah-langkah berikut untuk menampilkan ayat Al-Qur’an secara acak:",

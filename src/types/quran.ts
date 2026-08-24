@@ -103,3 +103,13 @@ export type SurahData = {
     numberOfAyahs: number
     ayahs: AyahData[]
 }
+
+export type AyahTafsirID = {
+    ayat: number
+    teks: string
+}
+
+export type AyahTafsir = {
+    ayah: number
+    tafsir: string
+}

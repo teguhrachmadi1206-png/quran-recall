@@ -1,29 +1,16 @@
-import { Language } from "@/types/config"
+'use client'
+import { useMenu } from "@/app/context/MenuContext";
 import elementsText from "@/lib/text"
-import "@/app/styles/options.css"
+import "@/app/styles/howToUse.css"
 
-interface OptionsProps {
-    setIsOptionOpened: React.Dispatch<React.SetStateAction<boolean>>
-    language: Language
-    setLanguage: React.Dispatch<React.SetStateAction<Language>>
-}
+export default function HowToUse() {
+    const { language, setLanguage } = useMenu()
 
-export default function Options({ setIsOptionOpened, language, setLanguage }: OptionsProps) {
     return (
-        <div className="options-box">
-            <div className="options-header">
-                <div className="lang-container">
-                    <label htmlFor="select-lang">{elementsText[language].language}</label>
-                    <select name="language" id="select-lang" className="select-lang" value={language} onChange={(e) => setLanguage(e.currentTarget.value as Language)}>
-                        <option value="en">English</option>
-                        <option value="id">Indonesia</option>
-                    </select>
-                </div>
-                <button className="main-btn how-to-btn" onClick={() => setIsOptionOpened(false)}>{elementsText[language].closeOptions}</button>
-            </div>
+        <div className="how-to-use-container">
             <div className="how-to-use-header">
-                <h2 className="how-to-main-header">{elementsText[language].howToDesc.header}<span>{elementsText[language].howToDesc.version}</span></h2>
-                <p className="how-to-desc">{elementsText[language].howToDesc.mainDesc}</p>
+                <h2 className="how-to-title">{elementsText[language].howToDesc.header}<span>{elementsText[language].howToDesc.version}</span></h2>
+                <p className="how-to-header-desc">{elementsText[language].howToDesc.mainDesc}</p>
             </div>
             <div className="how-to-desc-container">
                 <div className="how-to-desc-item">
@@ -46,9 +33,6 @@ export default function Options({ setIsOptionOpened, language, setLanguage }: Op
                     <p className="how-to-desc">{elementsText[language].howToDesc.subDesc4A}</p>
                     <p className="how-to-desc">{elementsText[language].howToDesc.subDesc4B}</p>
                 </div>
-            </div>
-            <div className="copyright">
-                <p>© 2026 Teguh Rachmadi. All Rights Reserved</p>
             </div>
         </div>
     )

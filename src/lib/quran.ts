@@ -1,4 +1,4 @@
-import type { SurahEN, SurahID, SurahHead, SurahData, AyahEN, AyahID, AyahData } from "@/types/quran"
+import type { SurahEN, SurahID, SurahHead, SurahData, AyahEN, AyahID, AyahData, AyahTafsir, AyahTafsirID } from "@/types/quran"
 import elementsText from "./text"
 
 export async function getSurahENList(setMessage: React.Dispatch<React.SetStateAction<string>>): Promise<SurahHead[]> {
@@ -94,4 +94,23 @@ export async function getSurahDetailID(surahNumber: string, setMessage: React.Di
     }
 
     return surahData
+}
+
+export async function getTafsirID(surahNumber: string, setMessage: React.Dispatch<React.SetStateAction<string>>): Promise<AyahTafsir[]> {
+    const response = await fetch(`https://equran.id/api/v2/tafsir/${surahNumber}`)
+
+    if (!response.ok) {
+        throw new Error(elementsText['id'].message.fetchSurahFail)
+    }
+
+    const data = await response.json()
+    const ayahsTafsir: AyahTafsir[] = []
+    await data.data.tafsir.forEach((ayah: AyahTafsirID) => {
+        ayahsTafsir.push({
+            ayah: ayah.ayat,
+            tafsir: ayah.teks
+        })
+    })
+
+    return ayahsTafsir
 }

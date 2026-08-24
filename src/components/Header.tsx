@@ -1,17 +1,22 @@
-import { Language } from "@/types/config"
+'use client'
+import { useState, useEffect } from "react";
+import { usePathname, useSearchParams } from 'next/navigation';
+import { useMenu } from "@/app/context/MenuContext";
 import elementsText from "@/lib/text"
 import "@/app/styles/header.css"
+import Link from 'next/link';
 
-interface HeaderProps {
-    setIsOptionOpened: React.Dispatch<React.SetStateAction<boolean>>
-    language: Language
-    setLanguage: React.Dispatch<React.SetStateAction<Language>>
-}
+export default function Header() {
+    const { isMenuOpen, setIsMenuOpen } = useMenu()
+    const { language, setLanguage } = useMenu()
 
-export default function Header({ setIsOptionOpened, language, setLanguage }: HeaderProps) {
+    function toggleMenu() {
+        setIsMenuOpen(!isMenuOpen)
+    }
+
     return (
         <header>
-            <h1 className="title">Quran Recall</h1>
+            <h2 className="title">Quran Recall</h2>
             <span className="title-desc">{elementsText[language].desc}</span>
             <div className="menu-container">
                 <div className="flag-container">
@@ -26,13 +31,24 @@ export default function Header({ setIsOptionOpened, language, setLanguage }: Hea
                         <span>ID</span>
                     </div>
                 </div>
-                <button className="about-btn" onClick={() => setIsOptionOpened(true)}>About</button>
-                {/* <div className="options-icon" onClick={() => setIsOptionOpened(true)}>
+                <div className="options-icon" onClick={toggleMenu}>
                     <div className="bullet"></div>
                     <div className="bullet"></div>
                     <div className="bullet"></div>
-                </div> */}
+                    {isMenuOpen && <div className="menu">
+                        <Link href="/">
+                            <span className="menu-item">Home</span>
+                        </Link>
+                        <Link href="/murajaah">
+                            <span className="menu-item">Murajaah</span>
+                        </Link>
+                        <Link href="/about">
+                            <span className="menu-item">About</span>
+                        </Link>
+                    </div>}
+                </div>
             </div>
+
         </header>
     )
 }
