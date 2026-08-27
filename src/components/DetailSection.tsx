@@ -39,6 +39,10 @@ const DetailSection = ({ surahData, config, setConfig, sessionData, language }: 
         arabicStartRef.current?.scrollIntoView({ behavior: "smooth", block: "start" })
     }, [config.displayArabic])
 
+    useEffect(() => {
+        setIsAudioPlayed(false)
+    }, [ayahDetail])
+
     function toggleArabicHandler() {
         if (sessionData.currentAyah > 0) {
             setConfig((prev) => ({
