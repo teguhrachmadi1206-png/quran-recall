@@ -4,10 +4,10 @@ import { useMenu } from "@/app/context/MenuContext";
 import { SurahHead, SurahData } from "@/types/quran";
 import { DisplayData, InputConfig } from "@/types/config";
 import { getSurahDetailEN, getSurahDetailID, getSurahENList, getSurahIDList } from "@/lib/quran"
+import { elementsText } from "@/lib/text";
 import InputSection from "@/components/InputSection";
 import DisplaySection from "@/components/DisplaySection";
 import DetailSection from "@/components/DetailSection";
-import elementsText from "@/lib/text";
 
 export default function MurajaahApp() {
     const { language, setLanguage } = useMenu()

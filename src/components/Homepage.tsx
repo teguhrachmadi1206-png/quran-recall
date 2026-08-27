@@ -4,7 +4,7 @@ import { useMenu } from "@/app/context/MenuContext";
 import { getSurahDetailEN, getSurahDetailID, getTafsirID } from "@/lib/quran"
 import { generateRandomNumber } from '@/lib/hooks';
 import { AyahData, AyahTafsir, SurahData } from '@/types/quran';
-import elementsText from '@/lib/text';
+import { elementsText } from '@/lib/text';
 import Link from 'next/link';
 import "@/app/styles/homepage.css"
 

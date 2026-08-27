@@ -1,18 +1,23 @@
-.how-to-use-container {
+.about-item-container {
     opacity: 1;
     transition: opacity 0.6s ease;
     width: 100%;
-    height: calc(100vh - var(--header-height) - var(--footer-height));
-    background: linear-gradient(90deg, var(--background-color1), var(--background-color2));
     text-align: left;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 1em;
+    margin: 0 auto;
+    border-bottom: 1px solid var(--main-font-color);
 }
 
-.how-to-use-header {
+.about-item-container:last-child {
+    padding: 0 1em;
+    border-bottom: none;
+}
+
+.about-item-header {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -21,31 +26,31 @@
     margin-bottom: 1em;
 }
 
-.how-to-title {
+.about-item-title {
     color: var(--message-font-color);
     font-size: var(--number-list-font-size);
     font-size: 1.2em;
 }
 
-.how-to-header-desc {
+.about-item-header-desc {
     font-weight: normal;
     font-style: italic;
+    text-align: justify;
+    margin-bottom: 0.5em;
 }
 
-.how-to-desc-container {
-    height: 95%;
+.about-item-desc-container {
     width: 95%;
-    overflow-y: scroll;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.how-to-desc-item {
+.about-desc-item {
     width: 95%;
 }
 
-.how-to-sub-header {
+.about-desc-sub-header {
     width: 100%;
     color: var(--message-font-color);
     font-size: var(--sub-title-font-size);
@@ -53,11 +58,11 @@
     margin: 1em 0 0.5em 0;
 }
 
-.how-to-sub-header:first-child {
+.about-desc-sub-header:first-child {
     margin: 0 0 0.5em 0;
 }
 
-.how-to-desc {
+.about-sub-desc {
     width: 95%;
     color: var(--sub-font-color);
     font-size: var(--text-font-size);
@@ -69,31 +74,35 @@
 }
 
 @media screen and (min-width: 640px) {
-    .how-to-use-container>div {
+    .about-item-container {
         max-width: 1000px;
         overflow: auto;
     }
 
-    .how-to-use-header {
+    .about-item-header {
         width: 90%;
-        height: 3em
     }
 
-    .how-to-title {
+    .about-item-title {
         font-size: var(--title-font-size);
         width: 90%;
     }
 
-    .how-to-desc-container {
+    /* 
+    .about-item-header-desc {
+        width: 80%;
+    } */
+
+    .about-item-desc-container {
         width: 90%;
     }
 
-    .how-to-sub-header {
+    .about-desc-sub-header {
         font-size: var(--number-list-font-size);
         width: 100%;
     }
 
-    .how-to-desc {
+    .about-sub-desc {
         color: var(--sub-font-color);
         font-size: var(--text-font-size);
         font-weight: 400;
@@ -105,7 +114,8 @@
 }
 
 @starting-style {
-    .how-to-use-container {
+    .about-item-container {
+        max-width: 1000px;
         opacity: 0;
     }
 }

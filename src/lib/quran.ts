@@ -1,5 +1,5 @@
 import type { SurahEN, SurahID, SurahHead, SurahData, AyahEN, AyahID, AyahData, AyahTafsir, AyahTafsirID } from "@/types/quran"
-import elementsText from "./text"
+import { elementsText } from "./text"
 
 export async function getSurahENList(setMessage: React.Dispatch<React.SetStateAction<string>>): Promise<SurahHead[]> {
     const response = await fetch("https://equran.id/api/en/surah")

@@ -73,6 +73,12 @@ body {
   padding: 0 0 0.5em 0;
 }
 
+.about-page {
+  height: calc(100vh - var(--header-height) - var(--footer-height));
+  width: 100%;
+  overflow: scroll;
+}
+
 section {
   width: var(--main-element-width);
   margin: var(--main-element-margin);
@@ -143,6 +149,7 @@ option {
   border: 0;
   border-radius: 20px;
   padding: 0.7em 1em;
+  text-decoration: none;
 }
 
 .main-btn:active {
@@ -182,6 +189,19 @@ option {
 
 .span-ref {
   height: 2em;
+}
+
+.feedback-container {
+  display: flex;
+  align-items: center;
+  padding: 1em;
+  max-width: 200px;
+  margin: 0 auto;
+}
+
+.feedback {
+  text-decoration: none;
+  color: var(--background-color1);
 }
 
 .footer {
@@ -238,6 +258,14 @@ option {
     justify-content: center;
     gap: 10px;
   }
+
+  .about-page {
+    max-width: 800px;
+    width: 90%;
+    margin: 0 auto;
+    overflow-x: hidden;
+  }
+
 
   section {
     min-width: 300px;

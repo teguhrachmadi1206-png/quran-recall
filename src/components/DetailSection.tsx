@@ -3,7 +3,7 @@
 import { useRef, useEffect, useState } from "react";
 import { SurahData } from "@/types/quran";
 import { DisplayData, DetailConfig, Language } from "@/types/config";
-import elementsText from "@/lib/text";
+import { elementsText } from "@/lib/text";
 import "@/app/styles/detailSection.css"
 
 interface DetailSectionProps {

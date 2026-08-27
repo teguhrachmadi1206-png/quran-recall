@@ -1,7 +1,7 @@
 import { SurahList, SurahHead, SurahData } from "@/types/quran";
 import { DetailConfig, DisplayData, InputConfig, Language } from "@/types/config";
 import { generateRandomList, generateRandomNumber } from "@/lib/hooks";
-import elementsText from "@/lib/text"
+import { elementsText } from "@/lib/text"
 import "@/app/styles/inputSection.css"
 
 interface InputSectionProps {

@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { usePathname, useSearchParams } from 'next/navigation';
 import { useMenu } from "@/app/context/MenuContext";
-import elementsText from "@/lib/text"
+import { elementsText } from "@/lib/text"
 import "@/app/styles/header.css"
 import Link from 'next/link';
 

@@ -19,3 +19,16 @@ export type DetailConfig = {
 }
 
 export type Language = "en" | "id"
+
+export type aboutItemDesc = {
+    itemId: number
+    subHeader: string
+    subDescs: string[]
+}
+
+export type aboutTextObj = {
+    header: string
+    headerAddition?: string
+    mainDesc: string[]
+    descItems?: aboutItemDesc[]
+}
