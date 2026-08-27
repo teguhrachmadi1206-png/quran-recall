@@ -43,7 +43,7 @@ export const elementsText = {
             unknownError: "An unknown error occurred"
         },
         copyright: "© 2026 Teguh Rachmadi. All Rights Reserved",
-        feedback: "Please send your feedback for improvements",
+        feedback: "Please send your feedback for improvements here",
     },
     id: {
         desc: "Uji hafalan Quranmu per ayat, satu demi satu",
@@ -89,7 +89,7 @@ export const elementsText = {
             unknownError: "Terjadi error yang tidak diketahui"
         },
         copyright: "© 2026 Teguh Rachmadi. All Rights Reserved",
-        feedback: "Berikan kritik dan saran untuk pengembangan",
+        feedback: "Berikan kritik dan saran untuk pengembangan di sini",
     },
 };
 

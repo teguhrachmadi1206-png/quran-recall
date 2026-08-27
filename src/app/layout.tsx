@@ -5,15 +5,18 @@ import Footer from "@/components/Footer";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Quran Recall",
-  description: "Test your memorization, one ayah at a time.",
+  title: {
+    default: "Quran Recall",
+    template: "%s | Quran Recall",
+  },
+  description: "A simple tool for Qur'an memorization and murajaah practice.",
 };
 
 export default function RootLayout({ children }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="id">
+    <html lang="en">
       <MenuProvider>
         <body>
           <Header />
